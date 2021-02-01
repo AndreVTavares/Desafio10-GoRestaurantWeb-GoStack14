@@ -1,20 +1,36 @@
 {
   "foods": [
     {
-      "id": 1,
-      "name": "Ao molhone",
       "image": "https://storage.googleapis.com/golden-wind/bootcamp-gostack/desafio-food/food1.png",
-      "price": "19.90",
-      "description": "Macarrão ao molho branco, fughi e cheiro verde das montanhas.",
+      "name": "prato da vovó",
+      "price": "15.90",
+      "description": "prato da vovó",
+      "available": true,
+      "id": 1
+    },
+    {
+      "image": "https://storage.googleapis.com/golden-wind/bootcamp-gostack/desafio-food/food1.png",
+      "name": "prato gostoso da vovó",
+      "price": "35.90",
+      "description": "prato gostoso",
+      "id": 3,
       "available": true
     },
     {
-      "id": 3,
-      "name": "A la camarone",
+      "image": "https://storage.googleapis.com/golden-wind/bootcamp-gostack/desafio-food/food1.png",
+      "name": "Outro prato",
+      "price": "11.90",
+      "description": "prato vei",
+      "available": true,
+      "id": 4
+    },
+    {
       "image": "https://storage.googleapis.com/golden-wind/bootcamp-gostack/desafio-food/food3.png",
-      "price": "25.90",
-      "description": "Macarrão com vegetais de primeira linha e camarão dos 7 mares.",
-      "available": true
+      "name": "prato diferente da vovó",
+      "price": "33.90",
+      "description": "sei o que tem ai não",
+      "available": true,
+      "id": 5
     }
   ]
 }

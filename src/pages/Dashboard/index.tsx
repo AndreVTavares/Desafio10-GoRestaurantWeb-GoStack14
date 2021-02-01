@@ -39,11 +39,7 @@ const Dashboard: React.FC = () => {
   ): Promise<void> {
     try {
       const newFood = await api.post('/foods', {
-        id: foods.length + 10,
-        name: food.name,
-        image: food.image,
-        price: food.price,
-        description: food.description,
+        ...food,
         available: true,
       });
 
@@ -57,22 +53,16 @@ const Dashboard: React.FC = () => {
     food: Omit<IFoodPlate, 'id' | 'available'>,
   ): Promise<void> {
     await api.put(`/foods/${editingFood.id}`, {
+      ...food,
       id: editingFood.id,
-      name: food.name,
-      image: food.image,
-      price: food.price,
-      description: food.description,
       available: true,
     });
 
     const newFoods = foods.map(f => {
       if (f.id === editingFood.id) {
         return {
+          ...food,
           id: editingFood.id,
-          name: food.name,
-          image: food.image,
-          price: food.price,
-          description: food.description,
           available: true,
         };
       }
