@@ -27,7 +27,8 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     async function loadFoods(): Promise<void> {
-      // TODO LOAD FOODS
+      const foodsLoaded = await api.get('/foods');
+      setFoods(foodsLoaded.data);
     }
 
     loadFoods();
@@ -37,7 +38,16 @@ const Dashboard: React.FC = () => {
     food: Omit<IFoodPlate, 'id' | 'available'>,
   ): Promise<void> {
     try {
-      // TODO ADD A NEW FOOD PLATE TO THE API
+      const newFood = await api.post('/foods', {
+        id: foods.length + 10,
+        name: food.name,
+        image: food.image,
+        price: food.price,
+        description: food.description,
+        available: true,
+      });
+
+      setFoods([...foods, newFood.data]);
     } catch (err) {
       console.log(err);
     }
@@ -46,11 +56,36 @@ const Dashboard: React.FC = () => {
   async function handleUpdateFood(
     food: Omit<IFoodPlate, 'id' | 'available'>,
   ): Promise<void> {
-    // TODO UPDATE A FOOD PLATE ON THE API
+    await api.put(`/foods/${editingFood.id}`, {
+      id: editingFood.id,
+      name: food.name,
+      image: food.image,
+      price: food.price,
+      description: food.description,
+      available: true,
+    });
+
+    const newFoods = foods.map(f => {
+      if (f.id === editingFood.id) {
+        return {
+          id: editingFood.id,
+          name: food.name,
+          image: food.image,
+          price: food.price,
+          description: food.description,
+          available: true,
+        };
+      }
+      return f;
+    });
+
+    setFoods(newFoods);
   }
 
   async function handleDeleteFood(id: number): Promise<void> {
-    // TODO DELETE A FOOD PLATE FROM THE API
+    const foodsExcluded = foods.filter(food => food.id !== id);
+    setFoods(foodsExcluded);
+    await api.delete(`/foods/${id}`);
   }
 
   function toggleModal(): void {
@@ -62,7 +97,8 @@ const Dashboard: React.FC = () => {
   }
 
   function handleEditFood(food: IFoodPlate): void {
-    // TODO SET THE CURRENT EDITING FOOD ID IN THE STATE
+    toggleEditModal();
+    setEditingFood(food);
   }
 
   return (
